@@ -61,7 +61,9 @@ io.on("connection", (socket) => {
     }
   });
 });
-
+app.get("/", (req, res) => {
+  res.send("Chat server is running.");
+});
 server.listen(3000, () => {
   console.log("Server listening on port 3000");
 });
