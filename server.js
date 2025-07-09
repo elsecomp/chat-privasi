@@ -49,3 +49,25 @@ app.get("/messages", async (req, res) => {
 io.on("connection", (socket) => {
   socket.on("join", (userId) => {
     socket.userId = userId;
+  });
+
+  socket.on("message", async (msg) => {
+    const messageData = {
+      text: msg.text,
+      sender: msg.sender,
+      timestamp: new Date(),
+    };
+    await db.collection("chats").add(messageData);
+    io.emit("message", messageData);
+  });
+
+  socket.on("disconnect", () => {
+    if (socket.userId) {
+      connectedUsers = connectedUsers.filter((id) => id !== socket.userId);
+    }
+  });
+});
+
+server.listen(3000, () => {
+  console.log("Server listening on port 3000");
+});
