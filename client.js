@@ -3,7 +3,7 @@ let userId;
 
 async function submitCode() {
   const code = document.getElementById("codeInput").value;
-  const res = await fetch("https://your-backend-url.onrender.com/auth", {
+  const res = await fetch("https://chat-privasi.up.railway.app/auth", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ code }),
