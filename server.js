@@ -3,8 +3,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const admin = require("firebase-admin");
 const cors = require("cors");
-const serviceAccount = require("./serviceAccountKey.json"); // Ganti dengan file key milikmu
-
+const serviceAccount = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
