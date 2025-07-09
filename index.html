@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat Pribadi</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="auth-section">
+    <h2>Masukkan Kode Rahasia</h2>
+    <input type="text" id="codeInput" placeholder="Kode..." />
+    <button onclick="submitCode()">Masuk</button>
+    <p id="authMessage"></p>
+  </div>
+
+  <div id="chat-section" style="display:none;">
+    <div id="messages"></div>
+    <div id="input-area">
+      <input type="text" id="messageInput" placeholder="Ketik pesan..." />
+      <button onclick="sendMessage()">Kirim</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
