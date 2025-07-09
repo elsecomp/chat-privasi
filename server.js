@@ -3,7 +3,9 @@ const http = require("http");
 const { Server } = require("socket.io");
 const admin = require("firebase-admin");
 const cors = require("cors");
+
 const serviceAccount = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -47,27 +49,3 @@ app.get("/messages", async (req, res) => {
 io.on("connection", (socket) => {
   socket.on("join", (userId) => {
     socket.userId = userId;
-  });
-
-  socket.on("message", async (msg) => {
-    const messageData = {
-      text: msg.text,
-      sender: msg.sender,
-      timestamp: new Date(),
-    };
-    await db.collection("chats").add(messageData);
-    io.emit("message", messageData);
-  });
-
-  socket.on("disconnect", () => {
-    if (socket.userId) {
-      connectedUsers = connectedUsers.filter((id) => id !== socket.userId);
-    }
-  });
-});
-app.get("/", (req, res) => {
-  res.send("Chat server is running.");
-});
-server.listen(3000, () => {
-  console.log("Server listening on port 3000");
-});
