@@ -31,11 +31,11 @@ function renderMessage(msg) {
 }
 
 async function initChat() {
-  const res = await fetch("https://your-backend-url.onrender.com/messages");
+  const res = await fetch("https://chat-privasi.up.railway.app/messages");
   const messages = await res.json();
   messages.forEach(renderMessage);
 
-  socket = io("https://your-backend-url.onrender.com");
+  socket = io("https://chat-privasi.up.railway.app");
   socket.emit("join", userId);
 
   socket.on("message", (msg) => {
